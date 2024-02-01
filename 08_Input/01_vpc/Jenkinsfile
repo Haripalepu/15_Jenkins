@@ -2,11 +2,11 @@
 pipeline {
     agent {
         node {
-            label 'AGENT-1'
+            label 'Agent'
         }
     }
     options {
-        ansiColor('xterm')
+        ansiColor('xterm') //To get some colourful output. we need to install the AnsiColor plugin.
     }
     parameters {
         choice(name: 'action', choices: ['apply', 'destroy'], description: 'Pick something')
