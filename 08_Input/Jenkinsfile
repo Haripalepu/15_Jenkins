@@ -35,7 +35,7 @@ pipeline {
                     params.action == 'apply'
                 }
             }
-            input {
+            input { //Input option asks for confirmation before it run terrafrom apply command
                 message "Should we continue?"
                 ok "Yes, we should."
             }
@@ -52,7 +52,7 @@ pipeline {
                     params.action == 'destroy'
                 }
             }
-            input { //Input option asks for confirmation before it run terrafrom deploy command.
+            input { //Input option asks for confirmation before it run terrafrom destroy command.
                 message "Should we continue?"
                 ok "Yes, we should."
             }

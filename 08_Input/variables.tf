@@ -1,6 +1,6 @@
 variable "sg-name" {
     type = string   # No need to give type=string,number etc. It's for user understanding.
-    default = "TerraformSG"
+    default = "Jenkins_input_sg"
   
 }
 

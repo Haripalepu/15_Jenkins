@@ -1,15 +1,15 @@
-resource "aws_instance" "SampleInstance" {  #Sampleinstance is terraform name
+resource "aws_instance" "Jenkins_Input" {  
   ami           = "ami-0f3c7d07486cad139" #devops-practice ami
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.SampleSG.id]
 
   tags = {
-    Name = "TerraformEc2" #Ec2 Instance name 
+    Name = "Jenkins_Input" #Ec2 Instance name 
   }
 }
 
 
-resource "aws_security_group" "SampleSG" {
+resource "aws_security_group" "Jenkins_input_sg" {
   name        = var.sg-name
   description = var.sg-description
   #vpc_id      = aws_vpc.main.id
@@ -31,6 +31,6 @@ resource "aws_security_group" "SampleSG" {
   }
 
   tags = {
-    Name = "TerraformSG"
+    Name = "Jenkins_input_sg"
   }
 }
