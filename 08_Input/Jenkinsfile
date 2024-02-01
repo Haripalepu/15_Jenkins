@@ -58,7 +58,7 @@ pipeline {
             }
             steps {
                 sh """
-                    cd ec2
+                    cd 08_Input
                     terraform destroy -auto-approve
                 """
             }
