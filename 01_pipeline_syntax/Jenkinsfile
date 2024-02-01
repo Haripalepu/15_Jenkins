@@ -1,0 +1,23 @@
+// Declarative pipeline
+
+pipeline { 
+    agent any
+
+    stages {
+        stage('Build') {   // Build is the name of the stage 
+            steps {
+                echo 'Building..'  // echo is a shell command to print
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}

@@ -1,0 +1,60 @@
+// Declarative pipeline
+
+pipeline { 
+    agent {  //Master node will connect to the below agent and run the jobs
+        node {
+            label 'Agent' //Lable name of the agent
+        }
+    }
+    environment {
+        NAME = "Jenkin" // To pass the variable
+    }
+
+    options {
+        timeout(time: 1, unit: "HOURS")  //The pipeline should run with in the given time
+        disableConcurrentBuilds() //It won't allow us to run two builds at a time.
+    }
+
+    parameters { //To declare the parameter. Aftr adding the parameters the first build will not take the parameters.Then if we refresh the jenkins console it will show build with parameters option.
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+
+        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+
+        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
+
+        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+    }
+
+    stages { // This is called build
+        stage('Build') {    
+            steps {
+                echo 'Building..'  // echo is a shell command to print
+            }
+        }
+        stage('Testing parameters') { //To access the parameter
+             steps{
+                sh """
+                    echo "Hello ${params.PERSON}"
+
+                    echo "Biography: ${params.BIOGRAPHY}"
+
+                    echo "Toggle: ${params.TOGGLE}"
+
+                    echo "Choice: ${params.CHOICE}"
+
+                    echo "Password: ${params.PASSWORD}"
+                """
+            }
+    }
+    }
+    post {  // This is post i.e it tells what to excute after build
+        always { 
+            echo 'This triggers after the build'
+        }
+        success { 
+            echo 'This will run if the build is sucess'
+        }
+    }
+}

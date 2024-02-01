@@ -1,0 +1,27 @@
+// Declarative pipeline
+
+pipeline { 
+    agent {  //Master node will connect to the below agent and run the jobs
+        node {
+            label 'Agent' //Lable name of the agent
+        }
+    }
+
+    stages {
+        stage('Build') {   // Build is the name of the stage 
+            steps {
+                echo 'Building..'  // echo is a shell command to print
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}

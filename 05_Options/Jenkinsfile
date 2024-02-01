@@ -1,0 +1,39 @@
+// Declarative pipeline
+
+pipeline { 
+    agent {  //Master node will connect to the below agent and run the jobs
+        node {
+            label 'Agent' //Lable name of the agent
+        }
+    }
+    environment {
+        NAME = "Jenkin" // To pass the variable
+    }
+    options {
+        timeout(time: 1, unit: "HOURS")  //The pipeline should run with in the given time
+        disableConcurrentBuilds() //It won't allow us to run two builds at a time.
+        ansiColor('xterm') ////To get some colourful output. we need to install the AnsiColor plugin.
+    }
+    stages { // This is called build
+        stage('Build') {    
+            steps {
+                echo 'Building..'  // echo is a shell command to print
+            }
+        }
+        stage('Testing variables') {
+            steps {
+                sh '''
+                   echo "This is $NAME pipeline "  // Access the variable
+                '''
+            }
+    }
+    }
+    post {  // This is post i.e it tells what to excute after build
+        always { 
+            echo 'This triggers after the build'
+        }
+        success { 
+            echo 'This will run if the build is sucess'
+        }
+    }
+}
