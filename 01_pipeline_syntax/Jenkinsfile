@@ -6,12 +6,12 @@ pipeline {
     stages {
         stage('Build') {   // Build is the name of the stage 
             steps {
-                echo 'Building..'  // echo is a shell command to print
+                echo 'Building...'  // echo is a shell command to print
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                echo 'Testing...'
             }
         }
         stage('Deploy') {
